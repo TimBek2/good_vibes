@@ -5,7 +5,7 @@ class Message < ActiveRecord::Base
   validates_presence_of :body, :sender_id, :receiver_id
   validates_uniqueness_of :sender_id, scope: :receiver_id
 
-    scope :involving, -> (user) do
+  scope :involving, -> (user) do
     where("messages.sender_id =? OR messages.receiver_id =?",user.id,user.id)
   end
 
