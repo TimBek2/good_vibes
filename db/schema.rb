@@ -16,23 +16,22 @@ ActiveRecord::Schema.define(version: 20160418014409) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "conversations", force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
+    t.text     "body",        null: false
     t.integer  "sender_id",   null: false
     t.integer  "receiver_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "conversations", ["receiver_id"], name: "index_conversations_on_receiver_id", using: :btree
-  add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
-
-  create_table "messages", force: :cascade do |t|
-  end
+  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
-    t.string   "email"
+    t.string   "username",        null: false
+    t.string   "email",           null: false
     t.string   "password_digest"
+    t.text     "prompt"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
