@@ -3,14 +3,20 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#show'
+  root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
     resources :users, except: [:index, :update, :edit]
-    resource :session, only: [:create, :destroy]
+
+    get '/login' => 'sessions#new'
+    post '/login' => 'sessions#create'
+    get '/logout' => 'sessions#destroy'
+
+    get '/signup' => 'users#new'
+    post '/users' => 'users#create'
 
   # Example resource route with sub-resources:
   #   resources :products do

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 			if @user.save
 				flash.notice = 'Thanks for registering!'
+				session[:user_id] = @user.id
 				redirect_to user_path(@user)
 			else
 				flash.now[:alert] = 'Something went wrong!'
